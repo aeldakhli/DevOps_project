@@ -13,7 +13,7 @@ spec:
       releaseName: argocd
       valueFiles:
       - $values/helm-charts/argo-cd/values.yaml
-  - repoURL: 'hhttps://github.com/aeldakhli/DevOps_project.git'
+  - repoURL: 'https://github.com/aeldakhli/DevOps_project.git'
     targetRevision: main
     ref: values
   destination:
