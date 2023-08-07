@@ -1761,7 +1761,7 @@ server:
     # -- Server service labels
     labels: {}
     # -- Server service type
-    type: NodePort
+    type: ClusterIP
     # -- Server service http port for NodePort service type (only if `server.service.type` is set to "NodePort")
     nodePortHttp: 30080
     # -- Server service https port for NodePort service type (only if `server.service.type` is set to "NodePort")
@@ -1842,19 +1842,25 @@ server:
 
   ingress:
     # -- Enable an ingress resource for the Argo CD server
-    enabled: false
+    enabled: true
     # -- Additional ingress annotations
-    annotations: {}
+    annotations: 
+      cert-manager.io/cluster-issuer: "glab-main-dakhli"
+      #nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+      nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+      nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+
     # -- Additional ingress labels
     labels: {}
     # -- Defines which ingress controller will implement the resource
-    ingressClassName: ""
+    ingressClassName: "nginx"
 
     # -- List of ingress hosts
     ## Argo Ingress.
     ## Hostnames must be provided if Ingress is enabled.
     ## Secrets must be manually created in the namespace
-    hosts: []
+    hosts: 
+     - argocd.devops-scenarios.online
       # - argocd.example.com
 
     # -- List of ingress paths
@@ -1873,9 +1879,10 @@ server:
       #         name: use-annotation
 
     # -- Ingress TLS configuration
-    tls: []
+    tls: argocd-main-tls
       # - secretName: your-certificate-name
-      #   hosts:
+         hosts:
+          - argocd.devops-scenarios.online
       #     - argocd.example.com
 
     # -- Uses `server.service.servicePortHttps` instead `server.service.servicePortHttp`
