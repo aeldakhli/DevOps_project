@@ -1879,8 +1879,8 @@ server:
       #         name: use-annotation
 
     # -- Ingress TLS configuration
-    tls: argocd-main-tls
-      # - secretName: your-certificate-name
+    tls: 
+       - secretName: argocd-main-tls
          hosts:
           - argocd.devops-scenarios.online
       #     - argocd.example.com
