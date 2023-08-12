@@ -428,7 +428,7 @@ server:
     # configure the ingress to point to the Vault active service.
     activeService: true
     hosts:
-      - host: vault.newtenant.devops-scenarios.site
+      - host: vault.newtenant.devops-scenarios.online
         paths:
           - /
     ## Extra paths to prepend to the host configuration. This is useful when working with annotation based services.
@@ -442,7 +442,7 @@ server:
     tls:
      - secretName: vault.glab-main
        hosts:
-         - vault.newtenant.devops-scenarios.site
+         - vault.newtenant.devops-scenarios.online
 
   # OpenShift only - create a route to expose the service
   # By default the created route will be of type passthrough
