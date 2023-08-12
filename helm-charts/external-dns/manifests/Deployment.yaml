@@ -31,4 +31,4 @@ spec:
         #- --txt-owner-id=glab-prod # In case of multiple k8s cluster
         - --godaddy-api-key=$(GoDaddyAPIKey)
         - --godaddy-api-secret=$(GoDaddySecretKey)
-        - --exclude-target-net=10.0.0.0/8
+        - --exclude-target-net=192.168.0.0/16
