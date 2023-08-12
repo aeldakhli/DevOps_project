@@ -8,7 +8,7 @@ spec:
   sources:
   - repoURL: 'https://github.com/aeldakhli/DevOps_project.git'
     targetRevision: main
-    path: helm-charts/external-dns/*
+    path: helm-charts/external-dns/manifests
   destination:
     server: https://kubernetes.default.svc
     namespace: external-dns
