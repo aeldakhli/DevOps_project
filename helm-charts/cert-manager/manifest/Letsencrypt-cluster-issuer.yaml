@@ -1,0 +1,19 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: glab-main-dakhli
+spec:
+  acme:
+    email: ahmedeldakhli@gmail.com
+    # let's encrypt staging 
+    # server: https://acme-staging-v02.api.letsencrypt.org/directory
+    # let's encrypt prod
+    server: https://acme-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      # Secret resource that will be used to store the account's private key.
+      name: glab-main-dakhli-issuer-key
+    # Add a single challenge solver, HTTP01 using nginx
+    solvers:
+    - http01:
+        ingress:
+          ingressClassName: nginx
