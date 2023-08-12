@@ -1860,7 +1860,7 @@ server:
     ## Hostnames must be provided if Ingress is enabled.
     ## Secrets must be manually created in the namespace
     hosts: 
-     - argocd.devops-scenarios.online
+     - argocd.newtenant.devops-scenarios.online
       # - argocd.example.com
 
     # -- List of ingress paths
@@ -1882,7 +1882,7 @@ server:
     tls: 
        - secretName: argocd-main-tls
          hosts:
-          - argocd.devops-scenarios.online
+          - argocd.newtenant.devops-scenarios.online
       #     - argocd.example.com
 
     # -- Uses `server.service.servicePortHttps` instead `server.service.servicePortHttp`
