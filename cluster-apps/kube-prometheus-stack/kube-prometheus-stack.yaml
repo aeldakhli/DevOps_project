@@ -4,6 +4,9 @@ metadata:
   name: kps
   namespace: argocd
 spec:
+  syncPolicy:
+   syncOptions:
+    - ServerSideApply=true
   project: default
   sources:
   - repoURL: 'https://prometheus-community.github.io/helm-charts'
