@@ -2540,7 +2540,7 @@ prometheus:
 
     ## Service type
     ##
-    type: LoadBalancer
+    type: ClusterIP
 
     ## Port to expose on each node
     ##
@@ -2693,7 +2693,7 @@ prometheus:
 
     # For Kubernetes >= 1.18 you should specify the ingress-controller via the field ingressClassName
     # See https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/#specifying-the-class-of-an-ingress
-    # ingressClassName: nginx
+    ingressClassName: nginx
 
     annotations:
       cert-manager.io/cluster-issuer: glab-main-dakhli
