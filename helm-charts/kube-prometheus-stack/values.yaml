@@ -2696,7 +2696,7 @@ prometheus:
     # ingressClassName: nginx
 
     annotations:
-      cert-manager.io/cluster-issuer: glab-prod
+      cert-manager.io/cluster-issuer: glab-main-dakhli
     labels: {}
 
     ## Redirect ingress to an additional defined port on the service
