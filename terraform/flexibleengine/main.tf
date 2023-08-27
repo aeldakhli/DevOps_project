@@ -270,8 +270,3 @@ output "Server_ID" {
   description = "Jump Server ID"
   value = flexibleengine_compute_instance_v2.JumpServerName.id
 }
-
-output "DiskSize" {
-  description = "Jump Server EVS Disk Size"
-  value = flexibleengine_blockstorage_volume_v2.jump_vol.bastion-disk-size
-}
