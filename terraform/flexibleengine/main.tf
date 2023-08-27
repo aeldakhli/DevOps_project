@@ -1,4 +1,3 @@
-# TriggerRunTest
 #Define Variables
 variable "job" {
   description = "Name of the instance that will be created"
