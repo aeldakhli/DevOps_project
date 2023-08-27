@@ -1,13 +1,13 @@
 #Define Variables
-variable "job" {
+variable "bastion-name" {
   description = "Name of the instance that will be created"
   default = "Bastion"
   type = string
 }
 
-variable "size" {
+variable "bastion-disk-size" {
   description = "EVS Disk Size"
-  default = 10
+  default = 100
   type = number
 }
 
@@ -67,6 +67,8 @@ resource "flexibleengine_vpc_subnet_v1" "sub1" {
   cidr       = var.first_subnet_cidr
   gateway_ip = var.first_subnet_gw_IP
   vpc_id     = flexibleengine_vpc_v1.projectVPC.id
+  primary_dns = "100.125.0.41"
+  secondary_dns = "100.126.0.41"
 }
 
 # Create Second Subnet
@@ -75,6 +77,8 @@ resource "flexibleengine_vpc_subnet_v1" "sub2" {
   cidr       = var.second_subnet_cidr
   gateway_ip = var.second_subnet_gw_IP
   vpc_id     = flexibleengine_vpc_v1.projectVPC.id
+  primary_dns = "100.125.0.41"
+  secondary_dns = "100.126.0.41"
 }
 
 #Create Security Group
@@ -160,12 +164,12 @@ resource "flexibleengine_vpc_route_table" "route_table" {
 }
 # Create a Block Volume to be attached later to the VM
 resource "flexibleengine_blockstorage_volume_v2" "jump_vol" {
-  name = "${var.job}_Disk"
-  size = var.size
+  name = "${var.bastion-name}_Disk"
+  size = var.bastion-disk-size
 }
 # Create an Elastic Cloud Server resource
 resource "flexibleengine_compute_instance_v2" "JumpServerName" {
-  name            = var.job
+  name            = var.bastion-name
   image_name      = "OBS CentOS 7.9"
   flavor_id       = "s3.large.2"
   key_pair        = var.key_pair
@@ -186,8 +190,8 @@ resource "flexibleengine_vpc_eip" "JumpServerIP" {
     type = "5_bgp"
   }
   bandwidth {
-    name = "var.job"
-    size = 8
+    name = var.bastion-name
+    size = 5
     share_type = "PER"
     charge_mode = "traffic"
   }
@@ -198,15 +202,76 @@ resource "flexibleengine_compute_floatingip_associate_v2" "floatingIP" {
   instance_id = flexibleengine_compute_instance_v2.JumpServerName.id
 }
 
+# Create CCE Cluster
+variable "flavor_id" { 
+  description = "Flavor of the (Required) Cluster specifications. Changing this parameter will create a new cluster resource."
+}
+
+variable "network-type" {
+  description = "Container network type"
+}
+
+variable "cluster-name" {}
+
+variable "pool-name" {}
+
+resource "flexibleengine_cce_cluster_v3" "project-cluster" {
+  depends_on = [
+     flexibleengine_vpc_route_table.route_table
+    ]
+  name                   = var.cluster-name
+  cluster_type           = "VirtualMachine"
+  cluster_version        = "v1.25"
+  container_network_cidr = "172.16.0.0/16"
+  authentication_mode    = "rbac"
+  description            = "DevOps Project Cluster"
+  flavor_id              = var.flavor_id
+  vpc_id                 = flexibleengine_vpc_v1.projectVPC.id
+  subnet_id              = flexibleengine_vpc_subnet_v1.sub2.id
+  container_network_type = var.network-type
+  # masters {
+  #       availability_zone = "eu-west-0c"
+#    }
+
+}
+
+# Create CCE Cluster Node Pool
+resource "flexibleengine_cce_node_pool_v3" "node_pool" {
+  cluster_id               = flexibleengine_cce_cluster_v3.project-cluster.id
+  name                     = var.pool-name
+  os                       = "EulerOS 2.9"
+  initial_node_count       = 2
+  flavor_id                = "s3.large.4"
+  availability_zone        = "eu-west-0c"
+  key_pair                 = var.key_pair
+  scale_enable             = false
+  # min_node_count           = 1
+  # max_node_count           = 10
+  # scale_down_cooldown_time = 100
+  # priority                 = 1
+  type                     = "vm"
+
+  root_volume {
+    size       = 40
+    volumetype = "SAS"
+  }
+  data_volumes {
+    size       = 200
+    volumetype = "SAS"
+  }
+}
 
 output "Floating_IP" {
- value =  flexibleengine_vpc_eip.JumpServerIP.publicip.0.ip_address
+  description = "Jump Server floating IP"
+  value =  flexibleengine_vpc_eip.JumpServerIP.publicip.0.ip_address
 }
 
 output "Server_ID" {
+  description = "Jump Server ID"
   value = flexibleengine_compute_instance_v2.JumpServerName.id
 }
 
 output "DiskSize" {
-  value = flexibleengine_blockstorage_volume_v2.jump_vol.size
+  description = "Jump Server EVS Disk Size"
+  value = flexibleengine_blockstorage_volume_v2.jump_vol.bastion-disk-size
 }
