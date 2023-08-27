@@ -17,13 +17,13 @@ variable "OS_DOMAIN_NAME" {}
 variable "OS_PROJECT_NAME" {}
 
 #Configure the FlexibleEngine Provider
-provider "flexibleengine" {
- domain_name = var.OS_DOMAIN_NAME
- access_key   = var.OS_ACCESS_KEY
- secret_key    = var.OS_SECRET_KEY
- region      = var.OS_REGION_NAME
- tenant_name = var.OS_PROJECT_NAME
-}
+# provider "flexibleengine" {
+#  domain_name = var.OS_DOMAIN_NAME
+#  access_key   = var.OS_ACCESS_KEY
+#  secret_key    = var.OS_SECRET_KEY
+#  region      = var.OS_REGION_NAME
+#  tenant_name = var.OS_PROJECT_NAME
+# }
 
 # terraform {
 #   required_version = ">= 0.13"
