@@ -43,5 +43,6 @@ Thumbs.db
 # Terraform Local generated files
 terraform/flexibleengine/.terraform/*
 terraform/flexibleengine/.terraform.*
-terraform/flexibleengine/*.tfstate
+terraform/flexibleengine/*.tfstate*
+env
 

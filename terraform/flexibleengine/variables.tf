@@ -1,0 +1,20 @@
+#Define Variables
+variable "vpc_name" {}
+variable "bastion-name" {}
+variable "bastion-disk-size" {}
+variable "vpc_cidr" {}
+variable "first_subnet_name" {}
+variable "second_subnet_name" {}
+variable "first_subnet_cidr" {}
+variable "second_subnet_cidr" {}
+variable "first_subnet_gw_IP" {}
+variable "second_subnet_gw_IP" {}
+variable "key_pair" {}
+variable "nat_gw" {}
+variable "sec_grp_name" {}
+variable "jump-image_name" {}
+variable "bastion-flavor" {}
+variable "cluster-name" {}
+variable "flavor_id" {}
+variable "network-type" {}
+variable "pool-name" {}

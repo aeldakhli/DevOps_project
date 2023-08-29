@@ -1,5 +1,7 @@
 bastion-name = "BastionServer"
 bastion-disk-size = 100
+jump-image_name = "OBS CentOS 7.9"
+bastion-flavor = "s3.large.2"
 vpc_name = "Dakhli_Project_VPC"
 vpc_cidr = "10.0.0.0/8"
 first_subnet_name = "SubnetOne"
