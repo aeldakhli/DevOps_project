@@ -1,7 +1,8 @@
 # Module specifications:
 
 ## Module variables:
-+ Below are the needed inputes for this module:
+> [!IMPORTANT]
+> Below are the module variables:
  - key_pair: mame of your keypair
  - cluster-description: It is your cluster description if needed, default value is "DevOps Project Cluster"
  - cce-node-type: Cluster nodes tyoe wether it's virtual machines or Bare metal servers default is "vm"
@@ -28,9 +29,9 @@
 
  ## Module required provider & version:
 
-It uses terrafor version >= 0.13 and FlexibleEngineCloud/flexibleengine provider version >= 1.30.0
+- It uses terrafor version >= 0.13 and FlexibleEngineCloud/flexibleengine provider version >= 1.30.0
 
-below is a sample configuration:
+- Below is a sample configuration:
 
 ```
 terraform {

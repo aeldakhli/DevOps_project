@@ -14,9 +14,9 @@
 
 ## Module required provider & version:
 
-It uses terrafor version >= 0.13 and FlexibleEngineCloud/flexibleengine provider version >= 1.30.0
+- It uses terrafor version >= 0.13 and FlexibleEngineCloud/flexibleengine provider version >= 1.30.0
 
-below is a sample configuration:
+- Below is a sample configuration:
 
 ```
 terraform {
