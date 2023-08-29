@@ -45,4 +45,4 @@ terraform/flexibleengine/.terraform/*
 terraform/flexibleengine/.terraform.*
 terraform/flexibleengine/*.tfstate*
 env
-terraform/flexibleengine/terraform.tfvars
+#terraform/flexibleengine/terraform.tfvars
