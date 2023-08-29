@@ -1,5 +1,9 @@
 # Module specifications:
 
+## About the module
+ - This module has been prepared by Ahmed ElDakhli for creating CCE resource on OBS Flexible Engnie Cloud.
+ - It is considring false auto scaling opption cause this module has been created on small scale.
+ 
 ## Module variables:
 > [!IMPORTANT]
 > Below are the module variables:
