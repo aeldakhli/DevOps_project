@@ -1,7 +1,8 @@
 # Module specifications:
 
 ## Module variables:
-+ Below are the module variables:
+> [!IMPORTANT]
+> Below are the module variables:
  - bastion-name: Name of the instance that will be created default is "Bastion" and type is string
  - bastion-disk-size: The EVS Disk Size default is "100" type is number
  - sec_grp_name: Security group name
