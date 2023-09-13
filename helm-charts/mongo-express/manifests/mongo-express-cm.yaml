@@ -1,9 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
- name: mongo-express-configmap
- namespace: custom-apps
- labels: 
-   app: mongo-express
-data:
-  database_url: mongodb-service
