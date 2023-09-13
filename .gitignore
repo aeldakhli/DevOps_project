@@ -39,6 +39,7 @@ Thumbs.db
 # Certain Files #
 ######################
 *Cred.yaml
+*secret*
 
 # Terraform Local generated files
 terraform/flexibleengine/.terraform/*
